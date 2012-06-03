@@ -9,4 +9,4 @@ After this actions go to your site and continue installation
 
 Version history:
 =======
-2.0.0 pre-alpha: Only user and admin interfaces
+2.0.0 alpha: Only user and admin interfaces
