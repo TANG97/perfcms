@@ -1,0 +1,7 @@
+<div class="title">{{ Lang.get('forum_delete_section', 'forum') }}</div>
+<div class="post">
+	<form action="/forum/section_actions-{{section.id}}?do=delete" method="post">
+		<input type="submit" name="yes" value="{{ Lang.get('forum_delete_section', 'forum')}}" />
+		<input type="submit" name="back" value="{{ Lang.get('back') }}" />
+	</form>
+</div>

@@ -1,0 +1,25 @@
+<div class="title"><b>{{ Lang.get('news_comments', 'news') }} - {{ details.name }}</b></div>
+{% if User.loged() %}
+<div class="menu">
+<form action="/news/comments-{{details.id}}?comment=add" method="post">
+{{ System.textarea()|raw }}<br/>
+<input type="submit" value="{{ Lang.get('add') }}" />
+</form>
+</div>
+{% endif %}
+{% for comments in array %}
+<div id="{{comments.id}}" class="post">
+{{ User.nick(comments.user_id) }} <span style="color: gray;">{{ Filters.viewTime(comments.time) }}</span> <span style="float:right;">{% if comments.user_id != User.Id() and User.loged() %} [<a href="#area" onclick="return bbtags('[quote][b]{{User.tnick(comments.user_id)}}[/b]\r\n{{comments.text}}\r\n', '[/quote]', '{{comments.id}}', 'area')">Re.</a>]
+{% endif %}
+{% if User.level() > 1 %}[<a href="/news/comments-{{ details.id }}?comment=delete&amp;this_id={{comments.id}}">x</a>]{% endif %}</span><br/>
+{{ Filters.output(comments.text)|raw }}
+</div>
+{% else %}
+<div class="menu">{{ Lang.get('news_no_comments', 'news') }}</div>
+{% endfor %}
+{{ pages.view() }}
+<div class="block">
+{{ System.image('back.png')|raw }} <a href="/news/article-{{ details.id }}">{{ details.name }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/news/">{{ Lang.get('news_title', 'news') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

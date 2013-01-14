@@ -1,0 +1,36 @@
+<div class="title"><b>{{ Lang.get('register') }}</b></div>
+{% if err !=false %}
+<div class="error">{{ err }}</div>
+{% endif %}
+<div class="post">
+<form action="/user/register?finaly" method="post">
+{{ Lang.get('nickname') }}:<br/>
+<input type="text" name="nickname" /><br/>
+{{ Lang.get('name') }}:<br/>
+<input type="text" name="name" /><br/>
+{{ Lang.get('gender') }}:<br/>
+<select name="gender">
+<option value="0">{{ Lang.get('gender_0') }}</option>
+<option value="1">{{ Lang.get('gender_1') }}</option>
+</select><br/>
+{{ Lang.get('password') }}:<br/>
+<input type="password" name="password" /><br/>
+{{ Lang.get('retry_password') }}:<br/>
+<input type="password" name="repassword" /><br/>
+E-Mail:<br/>
+<input type="text" name="email" /><br/>
+{{ Lang.get('enter_code_from_image') }}:<br/>
+<script>
+	function captcha_reload() {
+		document.getElementById('captcha').src = "/user/captcha?" + Math.random();
+	}
+	</script>
+<img id="captcha" src="/user/captcha" alt="captcha" /><br/>
+<a href="javascript:captcha_reload();">{{ Lang.get('refresh') }}</a><br />
+<input name="captcha" type="text" size="4" /><br/>
+<input type="submit" value="{{ Lang.get('register') }}" />
+</form>
+</div>
+<div class="block">
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

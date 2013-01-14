@@ -1,0 +1,57 @@
+<div class="title"><b>{{ Lang.get('smiles') }}</b></div>
+<div class="post">
+:)  <img src="/design/images/smiles/smile.gif" alt="#" /><br/>
+:-)  <img src="/design/images/smiles/smile.gif" alt="#" /><br/>
+:(  <img src="/design/images/smiles/sad.gif" alt="#" /><br/>
+:-(  <img src="/design/images/smiles/sad.gif" alt="#" /><br/>
+;-(  <img src="/design/images/smiles/cray.gif" alt="#" /><br/>
+;(  <img src="/design/images/smiles/cray.gif" alt="#" /><br/>
+:D  <img src="/design/images/smiles/biggrin.gif" alt="#" /><br/>
+:-D  <img src="/design/images/smiles/biggrin.gif" alt="#" /><br/>
+:P  <img src="/design/images/smiles/blum1.gif" alt="#" /><br/>
+:-P  <img src="/design/images/smiles/blum1.gif" alt="#" /><br/>
+:|  <img src="/design/images/smiles/bad.gif" alt="#" /><br/>
+8)  <img src="/design/images/smiles/cool.gif" alt="#" /><br/>
+:))  <img src="/design/images/smiles/i_am_so_happy.gif" alt="#" /><br/>
+%)  <img src="/design/images/smiles/wacko2.gif" alt="#" /><br/>
+%P  <img src="/design/images/smiles/wacko1.gif" alt="#" /><br/>
+[:)  <img src="/design/images/smiles/music.gif" alt="#" /><br/>
+:@  <img src="/design/images/smiles/yahoo.gif" alt="#" /><br/>
+:E  <img src="/design/images/smiles/crazy.gif" alt="#" /><br/>
+xD  <img src="/design/images/smiles/sarcastic.gif" alt="#" /><br/>
+>D  <img src="/design/images/smiles/diablo.gif" alt="#" /><br/>
+:lol:  <img src="/design/images/smiles/lol.gif" alt="#" /><br/>
+:rofl:  <img src="/design/images/smiles/rofl.gif" alt="#" /><br/>
+:blush:  <img src="/design/images/smiles/blush.gif" alt="#" /><br/>
+:bye:  <img src="/design/images/smiles/bye2.gif" alt="#" /><br/>
+:hi:  <img src="/design/images/smiles/hi.gif" alt="#" /><br/>
+:dance:  <img src="/design/images/smiles/dance.gif" alt="#" /><br/>
+:dash:  <img src="/design/images/smiles/dash2.gif" alt="#" /><br/>
+:beer:  <img src="/design/images/smiles/drinks.gif" alt="#" /><br/>
+:gamer:  <img src="/design/images/smiles/gamer.gif" alt="#" /><br/>
+:angel:  <img src="/design/images/smiles/girl_angel.gif" alt="#" /><br/>
+:heart:  <img src="/design/images/smiles/heart.gif" alt="#" /><br/>
+:good:  <img src="/design/images/smiles/good.gif" alt="#" /><br/>
+:hang:  <img src="/design/images/smiles/hang1.gif" alt="#" /><br/>
+:ireful:  <img src="/design/images/smiles/ireful.gif" alt="#" /><br/>
+:mad:  <img src="/design/images/smiles/mad.gif" alt="#" /><br/>
+:mail:  <img src="/design/images/smiles/mail1.gif" alt="#" /><br/>
+:love:  <img src="/design/images/smiles/man_in_love.gif" alt="#" /><br/>
+:mocking:  <img src="/design/images/smiles/mocking.gif" alt="#" /><br/>
+:no:  <img src="/design/images/smiles/nea.gif" alt="#" /><br/>
+:pardon:  <img src="/design/images/smiles/pardon.gif" alt="#" /><br/>
+:head:  <img src="/design/images/smiles/scratch_one-s_head.gif" alt="#" /><br/>
+O_o  <img src="/design/images/smiles/shok.gif" alt="#" /><br/>
+O_O  <img src="/design/images/smiles/shok.gif" alt="#" /><br/>
+o_O  <img src="/design/images/smiles/shok.gif" alt="#" /><br/>
+:O  <img src="/design/images/smiles/shok.gif" alt="#" /><br/>
+:sorry:  <img src="/design/images/smiles/sorry.gif" alt="#" /><br/>
+:unknown:  <img src="/design/images/smiles/unknown.gif" alt="#" /><br/>
+:yes:  <img src="/design/images/smiles/yes.gif" alt="#" /><br/>
+:kiss:  <img src="/design/images/smiles/kiss.gif" alt="#" /><br/>
+:girl_kiss:  <img src="/design/images/smiles/kiss3.gif" alt="#" /><br/>
+</div>
+<div class="block">
+{{ System.image('back.png')|raw }} <a href="/help">{{ Lang.get('back') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

@@ -1,0 +1,16 @@
+ </div>
+</td>
+ </tr>
+ </table>
+<div class="foot">
+	<span class="foot">
+	{{ System.styleSwitcher()|raw }}
+	</span>
+	<span class="foot_c">
+	{{ Lang.get('users_online') }}: [<a href="/user/online">{{ users }}</a>/<a href="/index/guests">{{ guests }}</a>]
+	</span>
+</div>
+{{ this.widgets('footer')|raw }}
+</div>
+</body>
+</html>

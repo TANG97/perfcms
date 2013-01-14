@@ -1,0 +1,47 @@
+<div class="title"><b>{{ Lang.get('edit_profile') }}</b></div>
+<div class="post">
+<form action="/user/editProfile?act=save" method="post">
+{{ Lang.get('name') }}:<br/>
+<input type="text" name="name" value="{{ UserData['name'] }}" /><br/>
+{{ Lang.get('surname') }}:<br/>
+<input type="text" name="surname" value="{{ UserData['surname'] }}" /><br/>
+{{ Lang.get('gender') }}:<br/>
+<select name="gender">
+<option value="1"{{ UserData['gender'] == 1 ? ' selected="selected"':""}}>{{ Lang.get('gender_1') }}</option>
+<option value="0"{{ UserData['gender'] == 0 ? ' selected="selected"':""}}>{{ Lang.get('gender_0') }}</option>
+</select><br/>
+{{ Lang.get('birth') }}:<br/>
+<select name="day">
+{% for day in 1..31 %}
+<option value="{{ day }}"{{ UserData['day'] == day ? ' selected="selected"':""}}>{{day}}</option>
+{% endfor %}
+</select> - 
+<select name="month">
+{% for month in 1..12 %}
+<option value="{{ month }}"{{ UserData['month'] == month ? ' selected="selected"':""}}>{{month}}</option>
+{% endfor %}
+</select> - 
+<select name="year">
+{% for year in 1960..currentYear %}
+<option value="{{ year }}"{{ UserData['year'] == year ? ' selected="selected"':""}}>{{year}}</option>
+{% endfor %}
+</select><br/>
+ICQ:<br/>
+<input type="text" value="{{ UserData['icq'] }}" name="icq" /><br/>
+{{ Lang.get('phone') }}:<br/>
+<input type="text" value="{{ UserData['phone'] }}" name="phone" /><br/>
+{{ Lang.get('site') }}:<br/>
+<input type="text" value="{{ UserData['site'] }}" name="site" /><br/>
+{{ Lang.get('user_info') }}:<br/>
+<textarea name="info" rows="5" cols="28">{{ UserData['info'] }}</textarea><br/>
+<input type="submit" value="{{ Lang.get('save') }}" />
+</form>
+</div>
+<div class="block">
+{% autoescape false %}
+{{ System.image('back.png') }}
+{% endautoescape %} <a href="/user/index">{{ Lang.get('panel') }}</a><br/>
+{% autoescape false %}
+{{ System.image('back.png') }}
+{% endautoescape %} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

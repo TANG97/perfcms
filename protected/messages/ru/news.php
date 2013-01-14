@@ -1,0 +1,22 @@
+<?php
+return array(
+	'news_title'			=> "Новости",
+	'news_text'				=> "Текст новости",
+	'news_name'				=> "Заголовок новости",
+	'news_no_articles'		=> "Статей нет.",
+	'news_category'			=> "Категория",
+	'news_categories'		=> "Категории",
+	'news_comments'			=> "Комментарии",
+	'news_no_category'		=> "Без категории",
+	'news_no_categories'	=> "Категорий нет",
+	'news_add_article'		=> "Создать новость",
+	'news_add_category'		=> "Создать категорию",
+	'news_no_comments'		=> "Комментариев нет",
+	'news_comments'			=> "Комментарии",
+	'news_category_name'	=> "Название категории",
+	'news_choose_image'		=> "Выберите изображение",
+	'news_edit_category'	=> "Редактировать категорию",
+	'news_edit_article'		=> "Редактировать новость",
+	'news_delete_article'	=> "Удалить новость",
+	'news_delete_category'	=> "Удалить категорию",
+);

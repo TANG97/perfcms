@@ -1,0 +1,47 @@
+<div class="title">
+	<b>{{ Lang.get('padmin_general_settings', 'padmin') }}</b>
+</div>
+<div class="menu">
+	<form action="/padmin/index/settings?act=save" method="post">
+		{{ Lang.get('padmin_site_language', 'padmin') }}:<br/>
+		<select name="language">
+			{% for lng in langs %}
+			{% if lng != '.' and lng != '..' %}
+			<option value="{{ lng }}" {{ Config.language == lng ? 'selected="selected"' : "" }}>{{Lang.get(lng, 'languages')}}</option>
+			{% endif %}
+			{% endfor %}
+		</select><br/>
+		{{ Lang.get('padmin_site_timezone', 'padmin') }}:<br/>
+		<select name="timezone">
+			{{ System.timezoneChoice(timezone)|raw}}
+		</select><br/>
+		{{ Lang.get('padmin_site_opened', 'padmin') }}:<br/>
+		<select name="open_site">
+			<option value="0"{{Config.open_site==0?' selected="selected"':''}}>{{ Lang.get('padmin_yes', 'padmin') }}</option>
+			<option value="1"{{Config.open_site==1?' selected="selected"':''}}>{{ Lang.get('padmin_no', 'padmin') }}</option>
+		</select><br/>
+		{{ Lang.get('padmin_site_access', 'padmin') }}:<br/>
+		<select name="access_site">
+			<option value="0"{{Config.access_site==0?' selected="selected"':''}}>{{ Lang.get('padmin_access_all', 'padmin') }}</option>
+			<option value="1"{{Config.access_site==1?' selected="selected"':''}}>{{ Lang.get('padmin_access_users', 'padmin') }}</option>
+			<option value="2"{{Config.access_site==2?' selected="selected"':''}}>{{ Lang.get('padmin_access_admins', 'padmin') }}</option>
+		</select><br/>
+		{{ Lang.get('padmin_site_signup', 'padmin') }}:<br/>
+		<select name="site_signup">
+			<option value="0"{{Config.access_site==0?' selected="selected"':''}}>{{ Lang.get('padmin_yes', 'padmin') }}</option>
+			<option value="1"{{Config.access_site==1?' selected="selected"':''}}>{{ Lang.get('padmin_no', 'padmin') }}</option>
+			<option value="2"{{Config.access_site==2?' selected="selected"':''}}>{{ Lang.get('padmin_signup_verify', 'padmin') }}</option>
+		</select><br/>
+		{{ Lang.get('padmin_site_description', 'padmin') }}:<br/>
+		<textarea name="description" rows="6" cols="28">{{ Config.description }}</textarea><br/>
+		{{ Lang.get('padmin_site_keywords', 'padmin') }}:<br/>
+		<textarea name="keywords" rows="6" cols="28">{{ Config.keywords }}</textarea><br/>
+		{{ Lang.get('padmin_num_of_pts', 'padmin') }}:<br/>
+		<input type="text" name="pts" value="{{Config.pts}}" size="2" /><br/>
+		<input type="submit" value="{{ Lang.get('save') }}" />
+	</form>
+</div>
+<div class="block">
+	{{ System.image('back.png')|raw }} <a href="/padmin/index">{{ Lang.get('padmin_title', 'padmin') }}</a><br/>
+	{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

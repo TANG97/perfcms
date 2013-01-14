@@ -1,0 +1,9 @@
+<div class="title"><b>{{ Lang.get('language') }}</b></div>
+{% for lang in langs %}
+{% if lang != '.' and lang != '..' %}
+<div class="post">
+<img src="/design/images/flags/{{lang}}.png" alt="{{lang}}" /> <a href="/index/language/?lang={{ lang }}">{{ Lang.get(lang, 'languages')|title }}</a>
+</div>
+{% endif %}
+{% endfor %}
+<div class="block">{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a></div>

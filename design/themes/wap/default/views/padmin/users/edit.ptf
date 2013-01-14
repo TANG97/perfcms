@@ -1,0 +1,44 @@
+<div class="title"><b>{{ Lang.get('edit_profile') }}</b></div>
+<div class="post">
+<form action="/padmin/users/edit?id={{user.id}}&amp;act=save" method="post">
+{{ Lang.get('name') }}:<br/>
+<input type="text" name="name" value="{{ user['name'] }}" /><br/>
+{{ Lang.get('surname') }}:<br/>
+<input type="text" name="surname" value="{{ user['surname'] }}" /><br/>
+{{ Lang.get('gender') }}:<br/>
+<select name="gender">
+<option value="1"{{ user['gender'] == 1 ? ' selected="selected"':""}}>{{ Lang.get('gender_1') }}</option>
+<option value="0"{{ user['gender'] == 0 ? ' selected="selected"':""}}>{{ Lang.get('gender_0') }}</option>
+</select><br/>
+{{ Lang.get('birth') }}:<br/>
+<select name="day">
+{% for day in 1..31 %}
+<option value="{{ day }}"{{ user['day'] == day ? ' selected="selected"':""}}>{{day}}</option>
+{% endfor %}
+</select> - 
+<select name="month">
+{% for month in 1..12 %}
+<option value="{{ month }}"{{ user['month'] == month ? ' selected="selected"':""}}>{{month}}</option>
+{% endfor %}
+</select> - 
+<select name="year">
+{% for year in 1960..currentYear %}
+<option value="{{ year }}"{{ user['year'] == year ? ' selected="selected"':""}}>{{year}}</option>
+{% endfor %}
+</select><br/>
+ICQ:<br/>
+<input type="text" value="{{ user['icq'] }}" name="icq" /><br/>
+{{ Lang.get('phone') }}:<br/>
+<input type="text" value="{{ user['phone'] }}" name="phone" /><br/>
+{{ Lang.get('site') }}:<br/>
+<input type="text" value="{{ user['site'] }}" name="site" /><br/>
+{{ Lang.get('user_info') }}:<br/>
+<textarea name="info" rows="5" cols="28">{{ user['info'] }}</textarea><br/>
+<input type="submit" value="{{ Lang.get('save') }}" />
+</form>
+</div>
+<div class="block">
+	{{ System.image('back.png')|raw }} <a href="/padmin/users/index">{{ Lang.get('padmin_users_manager', 'padmin') }}</a><br/>
+	{{ System.image('back.png')|raw }} <a href="/padmin/index">{{ Lang.get('padmin_title', 'padmin') }}</a><br/>
+	{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

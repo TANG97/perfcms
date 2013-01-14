@@ -1,0 +1,19 @@
+<div class="title"><b>{{ Lang.get('news_title', 'news') }}</b></div>
+<div class="block">
+{{ System.image('nav.png')|raw }} <a href="/news/index/categories">{{ Lang.get('news_categories', 'news') }}</a><br/>
+</div>
+{% for news in array %}
+<div class="menu">
+&raquo; <a href="/news/article-{{news.id}}">{{ news.name }}</a>
+</div>
+{{ pages.view('/news/index?') }}
+{% else %}
+<div class="menu">{{ Lang.get('news_no_articles', 'news') }}</div>
+{% endfor %}
+<div class="block">
+{% if User.loged() and User.level > 1%}
+{{ System.image('nav.png')|raw }} <a href="/news/index/add">{{ Lang.get('news_add_article', 'news') }}</a><br/>
+{{ System.image('nav.png')|raw }} <a href="/news/index/add_category">{{ Lang.get('news_add_category', 'news') }}</a><br/>
+{% endif %}
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

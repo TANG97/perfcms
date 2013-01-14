@@ -1,0 +1,29 @@
+<div class="title"><b>{{ Lang.get('change_password') }}</b></div>
+<div class="menu">
+<form action="/user/security?act=change_pass" method="post">
+{{ Lang.get('new_password') }}:<br/>
+<input type="password" name="new_pass" /><br/>
+{{ Lang.get('retry_password') }}:<br/>
+<input type="password" name="ret_pass" /><br/>
+{{ Lang.get('current_password') }}:<br/>
+<input type="password" name="cur_pass" /><br/>
+<input type="submit" value="{{ Lang.get('save') }}" />
+</form>
+</div>
+
+<div class="title"><b>{{ Lang.get('change_email') }}</b></div>
+<div class="menu">
+<form action="/user/security?act=change_email" method="post">
+{{ Lang.get('new_email') }}:<br/>
+<input type="text" name="new_email" /><br/>
+{{ Lang.get('cur_email') }}:<br/>
+<input type="text" name="cur_email" /><br/>
+{{ Lang.get('current_password') }}:<br/>
+<input type="password" name="cur_pass" /><br/>
+<input type="submit" value="{{ Lang.get('save') }}" />
+</form>
+</div>
+<div class="block">
+{{ System.image('back.png')|raw }}<a href="/user/index">{{ Lang.get('panel') }}</a><br/>
+{{ System.image('back.png')|raw }}<a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

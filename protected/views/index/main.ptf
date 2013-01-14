@@ -1,0 +1,3 @@
+<div class="title"><b>{{ Lang.get('mainpage') }}</b></div>
+{{ this.widgets('index')|raw }}
+{{ this.widgets('menu')|raw }}

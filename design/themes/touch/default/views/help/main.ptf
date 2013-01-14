@@ -1,0 +1,6 @@
+<div class="title"><b>{{ Lang.get('help') }}</b></div>
+<div class="post">{{ System.image('rules.png')|raw }} <a href="/help/rules">{{ Lang.get('rules') }}</a></div>
+<div class="post">{{ System.image('bbpanel/text_color.png')|raw }} <a href="/help/codes">{{ Lang.get('bb_codes') }}</a></div>
+<div class="post">{{ System.image('smiles.png')|raw }} <a href="/help/smiles">{{ Lang.get('smiles') }}</a></div>
+<div class="post">{{ System.image('help.png')|raw }} <a href="/help/faq">{{ Lang.get('questions') }}</a></div>
+<div class="block">{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a></div>

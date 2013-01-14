@@ -1,0 +1,17 @@
+
+<div class="title"><b>{{ Lang.get('login') }}</b></div>
+<div class="post">
+	<form action="/user/login?return={{ return }}" method="post">
+	{{ Lang.get('nickname') }}:<br/>
+	<input type="text" name="nickname" /><br/>
+	{{ Lang.get('password') }}<br/>
+	<input type="password" name="password" /><br/>
+	<input type="submit" name="login" value="{{ Lang.get('login') }}" />
+	</form>
+</div>
+<div class="block">
+{% autoescape false %}
+{{ System.image('back.png') }}
+{% endautoescape %} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>
+

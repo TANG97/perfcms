@@ -1,0 +1,31 @@
+<div class="title"><b>{{ Lang.get('padmin_title', 'padmin') }}</b></div>
+<div class="menu">
+{% set Image %}
+{{System.image('nav.png')|raw}}
+{% endset %} 
+{{ Image }} <a href="/padmin/index/settings/">{{ Lang.get('padmin_general_settings', 'padmin') }}</a>
+</div>
+<div class="menu">
+{{ Image }} <a href="/padmin/index/design">{{ Lang.get('padmin_design_settings', 'padmin') }}</a>
+</div>
+<div class="menu">
+{{ Image }} <a href="/padmin/users/index">{{ Lang.get('padmin_users_manager', 'padmin') }}</a>
+</div>
+<div class="menu">
+{{ Image }} <a href="/padmin/index/mainpage">{{ Lang.get('padmin_index_manager', 'padmin') }}</a>
+</div>
+<div class="menu">
+{{ Image }} <a href="/padmin/modules/index">{{ Lang.get('padmin_modules_manager', 'padmin') }}</a>
+</div>
+<div class="menu">
+{{ Image }} <a href="/padmin/index/themes">{{ Lang.get('padmin_themes_manager', 'padmin') }}</a>
+</div>
+<div class="menu">
+{{ Image }} <a href="/padmin/index/info/">{{ Lang.get('padmin_system_info', 'padmin') }}</a>
+</div>
+<div class="menu">
+{{ Image }} <a href="/padmin/index/stats/">{{ Lang.get('padmin_stats_info', 'padmin') }}</a>
+</div>
+<div class="block">
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

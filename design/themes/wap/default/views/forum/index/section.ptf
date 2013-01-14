@@ -1,0 +1,33 @@
+<div class="title">{{ section_title }}</div>
+{% for topic in topics %}
+<div class="post">
+	{% if topic.closed == 1 and topic.attach == 1 %}
+	{{ System.image('forum/pin-closed.png')|raw }}
+	{% elseif topic.closed == 1 %}
+	{{ System.image('forum/topic_closed.png')|raw }}
+	{% elseif topic.attach == 1 %}
+	{{ System.image('forum/pin.png')|raw }}
+	{% else %}
+	{{ System.image('forum/topic.png')|raw }}
+	{% endif %}
+	<a href="/forum/topic-{{ topic.id }}">{{ topic.name }}</a> ({{ this.countPosts(topic.id) }}) <a href="/forum/topic-{{topic.id}}?page=end">&raquo;</a>
+	{#
+	{% if User.level() > 1 or topic.user_id == User.Id() %}
+	[<a href="/forum/edit_topic-{{topic.id}}">+</a>|<a href="/forum/delete_topic-{{topic.id}}">x</a>]
+	{% endif %}
+	#}
+	<br/>
+	{{ this.lastActivity(topic.id)|raw }}
+</div>
+{% else %}
+<div class="error">{{ Lang.get('forum_no_topics', 'forum') }}</div>
+{% endfor %}
+{{ pages.view() }}
+<div class="block">
+{% if User.loged() %}
+	{{ System.image('nav.png')|raw }} <a href="/forum/add_topic-{{id}}">{{ Lang.get('forum_add_topic', 'forum') }}</a><br/>
+{% endif %}
+{{ System.image('back.png')|raw }} <a href="/forum/forum-{{fid}}">{{ Lang.get('back') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/forum/">{{ Lang.get('forum_title', 'forum') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

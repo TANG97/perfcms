@@ -1,0 +1,16 @@
+<div class="title"><b>{{ Lang.get('padmin_users_block', 'padmin') }}</b></div>
+<div class="post">
+<form action="/padmin/users/block?id={{user.id}}&amp;block" method="post">
+{{ Lang.get('padmin_users_block_time', 'padmin') }}:<br/>
+<input type="text" name="time" size="3" value="{{ user.ban_time }}" /><br/>
+
+{{ Lang.get('padmin_users_block_text', 'padmin') }}:<br/>
+<textarea name="info" rows="5" cols="28">{{ user.ban_text }}</textarea><br/>
+<input type="submit" value="{{ Lang.get('save') }}" />
+</form>
+</div>
+<div class="block">
+	{{ System.image('back.png')|raw }} <a href="/padmin/users/index">{{ Lang.get('padmin_users_manager', 'padmin') }}</a><br/>
+	{{ System.image('back.png')|raw }} <a href="/padmin/index">{{ Lang.get('padmin_title', 'padmin') }}</a><br/>
+	{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

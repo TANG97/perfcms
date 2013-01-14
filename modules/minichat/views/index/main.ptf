@@ -1,0 +1,30 @@
+<div class="title"><b>{{ Lang.get('minichat_title', 'minichat') }}</b></div>
+{% if User.loged() %}
+<div class="menu">
+<form action="/minichat?add" method="post">
+{{ System.textarea(6, 28)|raw }}<br/>
+<input type="submit" value="{{ Lang.get('add') }}" /> <a href="/minichat/index?rand={{ random(1234) }}">{{ System.image('refresh.png')|raw }}</a>
+</form>
+</div>
+{% endif %}
+{% for mchat in array %}
+<div id="{{mchat.id}}" class="post">
+{{ User.nick(mchat.user_id) }} <span style="color: gray;">{{ Filters.viewTime(mchat.time) }}</span>
+<span style="float:right;">{% if User.Id() != mchat.user_id %}[<a href="#area" onclick="return bbtags('[b]{{User.tnick(mchat.user_id)}}', '[/b], ', {{ mchat.id}}, 'area');">Re.</a>]{%endif%}
+{% if User.level() > 1 %}
+[<a href="/minichat?delete_message&amp;this_id={{mchat.id}}">x</a>]
+{% endif %}
+</span>
+<br/>
+{{ Filters.output(mchat.text)|raw }}
+</div>
+{% else %}
+<div class="menu">{{ Lang.get('minichat_no_posts', 'minichat') }}</div>
+{% endfor %}
+{{ pages.view() }}
+<div class="block">
+{% if User.level() > 1 %}
+{{ System.image('nav.png')|raw }} <a href="/minichat?clear">{{ Lang.get('minichat_clear_post', 'minichat') }}</a><br/>
+{% endif %}
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

@@ -1,0 +1,30 @@
+<div class="title">
+	<b>{{ Lang.get('padmin_stats_info', 'padmin') }}</b>
+</div>
+<div class="menu">
+	<b>{{ Lang.get('padmin_stats_last_users', 'padmin') }}</b>:<br/>
+	{% for user in users %}
+		<a href="/user/profile-{{ user.id }}">{{ User.tnick(user.id) }}</a>, 
+	{% endfor %}
+</div>
+<div class="menu">
+	<b>{{ Lang.get('padmin_stats_all_logined', 'padmin') }}</b>: {{ all }}
+</div>
+<div class="menu">
+	<b>{{ Lang.get('padmin_stats_last_regs', 'padmin') }}</b>:<br/>
+	{% for reg in regs %}
+		<a href="/user/profile-{{ reg.id }}">{{ User.tnick(reg.id) }}</a>, 
+	{% endfor %}
+</div>
+{#
+<div class="menu">
+	<b>{{ Lang.get('padmin_stats_guests', 'padmin') }}</b>:<br/>
+	{% for guest in guests %}
+		{{ guest.ip }} [{{ guest.browser}}] - <a href="{{ guest.from }}">{{ guest.from }}</a><br/> 
+	{% endfor %}
+</div>
+#}
+<div class="block">
+	{{ System.image('back.png')|raw }} <a href="/padmin/index">{{ Lang.get('padmin_title', 'padmin') }}</a><br/>
+	{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

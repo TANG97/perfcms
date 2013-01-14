@@ -1,0 +1,13 @@
+<div class="title">
+	<b>{{ Lang.get('padmin_users_manager', 'padmin') }}</b>
+</div>
+{% for user in users %}
+<div class="menu">
+{{ System.image('nav.png')|raw }} <a href="/padmin/users/edit?id={{ user.id }}">{{ User.tnick(user.id) }}</a> [ <a href="/padmin/users/delete?id={{ user.id }}">x</a> | <a href="/padmin/users/change?id={{ user.id }}">+</a> | <a href="/padmin/users/block?id={{ user.id }}">!</a> ]<br/>
+</div>
+{% endfor %}
+{{ pages.view() }}
+<div class="block">
+	{{ System.image('back.png')|raw }} <a href="/padmin/index">{{ Lang.get('padmin_title', 'padmin') }}</a><br/>
+	{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

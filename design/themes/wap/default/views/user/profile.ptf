@@ -1,0 +1,46 @@
+<div class="title"><b>{{ Lang.get('profile_of') }}{{ User.tnick(profile.id) }}</b></div>
+<div class="menu">
+{% autoescape false %}
+{{ User.photo(profile.id) }}<br/>
+{% endautoescape %}
+{% if profile.name is not empty %}
+<b>{{ Lang.get('name') }}</b>: {{ profile.name }}<br/>
+{% endif %}
+{% if profile.surname is not empty %}
+<b>{{ Lang.get('surname') }}</b>: {{ profile.surname }}<br/>
+{% endif %}
+<b>{{ Lang.get('gender') }}</b>: {{ profile.gender == 0 ? Lang.get('gender_0') : Lang.get('gender_1') }}<br/>
+{% if profile.year !=0 %}
+<b>{{ Lang.get('birth') }}</b>: {{ profile.day }}-{{ profile.month }}-{{ profile.year }}<br/>
+{% endif %}
+{% if profile.phone is not empty %}
+<b>{{ Lang.get('phone') }}</b>: {{ profile.phone }}<br/>
+{% endif %}
+{% if profile.icq !=0 %}
+<b>ICQ</b>: {{ profile.icq }}<br/>
+{% endif %}
+{% if profile.site is not empty %}
+<b>{{ Lang.get('site') }}</b>: <a href="http://{{ profile.site }}">{{ profile.site }}</a><br/>
+{% endif %}
+{% if profile.info is not empty %}
+<b>{{ Lang.get('user_info') }}</b>: {{ profile.info }}<br/>
+{% endif %}
+</div>
+{% if User.Id() != profile.id and User.loged() %}
+<div class="block">
+{{ System.image('mail.png')|raw }} <a href="/user/dialog?id={{ profile.id }}">{{ Lang.get('dialogs_write', 'dialogs') }}</a>
+</div>
+{% endif %}
+
+{% if User.level >=2 and profile.level < 3 and User.Id() != profile.id %}
+<div class="block">
+{{ System.image('nav.png')|raw }} <a href="/padmin/users/block?id={{ profile.id }}">{{ Lang.get('padmin_users_block', 'padmin') }}</a><br/>
+{{ System.image('nav.png')|raw }} <a href="/padmin/users/edit?id={{ profile.id }}">{{ Lang.get('padmin_users_edit', 'padmin') }}</a><br/>
+{{ System.image('nav.png')|raw }} <a href="/padmin/users/change?id={{ profile.id }}">{{ Lang.get('padmin_users_level', 'padmin') }}</a>
+</div>
+{% endif %}
+<div class="block">
+{% autoescape false %}
+{{ System.image('back.png') }}
+{% endautoescape %} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

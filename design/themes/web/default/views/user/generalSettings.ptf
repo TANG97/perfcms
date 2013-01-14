@@ -1,0 +1,39 @@
+<div class="title"><b>{{ Lang.get('general_settings') }}</b></div>
+<div class="post">
+<form action="/user/settings?act=save" method="post">
+
+{{ Lang.get('fast_form') }}:<br/>
+<select name="fast_mess">
+<option value="0" {{ Settings.fast_mess == 0 ? 'selected="selected"' : "" }}>{{ Lang.get('off') }}</option>
+<option value="1" {{ Settings.fast_mess == 1 ? 'selected="selected"' : "" }}>{{ Lang.get('on') }}</option>
+</select><br/>
+
+{{ Lang.get('signature') }}:<br/>
+<input name="signature" type="text" value="{{ Settings.signature }}" /><br/>
+{{ Lang.get('timezone') }}:<br/>
+<select name="timezone">
+{% autoescape false %}
+{{ System.timezoneChoice(timezone)}}
+{% endautoescape %}
+</select><br/>
+{{ Lang.get('language') }}:<br/>
+<select name="language">
+{% for lng in lngs %}
+{% if lng != '.' and lng != '..' %}
+<option value="{{ lng }}" {{ Settings.lang == lng ? 'selected="selected"' : "" }}>{{Lang.get(lng, 'languages')}}</option>
+{% endif %}
+{% endfor %}
+</select><br/>
+{{ Lang.get('num_of_pt') }}:<br/>
+<input type="text" name="ames" size="2" value="{{ Settings.ames }}" /><br/>
+<input type="submit" value="{{ Lang.get('save') }}" />
+</form>
+</div>
+<div class="block">
+{% autoescape false %}
+{{ System.image('back.png') }}
+{% endautoescape %} <a href="/user/index">{{ Lang.get('panel') }}</a><br/>
+{% autoescape false %}
+{{ System.image('back.png') }}
+{% endautoescape %} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

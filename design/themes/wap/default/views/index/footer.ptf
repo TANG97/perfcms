@@ -1,0 +1,30 @@
+<div class="footer">
+<span class="foot">
+{{ Lang.get('users_online') }}: [<a href="/user/online">{{ users }}</a>/<a href="/index/guests">{{ guests }}</a>]
+</span>
+<span class="foot_c">
+{{ System.styleSwitcher()|raw }}
+</div>
+</span>
+{{ this.widgets('footer')|raw }}
+<div class="block">
+  {% if System.Server('request_uri') == '/' or System.Server('request_uri') == '/index.php' %}
+{% if System.backlink() !=false %}
+	{{ System.backlink('panel')|raw }}
+	<a class="panel" href="/index/language">{{ Lang.get(System.CurrentLang(), 'languages')|title }}</a>
+	{% else %}
+	<a class="panel" href="/index/language">{{ Lang.get(System.CurrentLang(), 'languages')|title }}</a>
+	{% endif %}
+	  {% else %}
+	{% if System.backlink() !=false %}
+	{{ System.backlink('panel')|raw }}
+	{% endif %}
+	<a class="panel" href="/index/language">{{ Lang.get(System.CurrentLang(), 'languages')|title }}</a>
+			   {% endif %}
+</div>
+{# <div class="count">
+</div> #}
+
+</div>
+</body>
+</html>

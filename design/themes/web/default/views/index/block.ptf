@@ -1,0 +1,4 @@
+<div class="post">
+{{ Lang.get('padmin_users_block_notify', 'padmin') }} {{ Filters.viewTime(User.ban_time) }}<br/>
+{{ User.ban_text }}
+</div>

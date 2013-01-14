@@ -1,0 +1,14 @@
+<div class="title"><b>{{ Lang.get('users_list') }}</b></div>
+{% for lists in list %}
+<div class="menu">
+{{ User.nick(lists.id) }}
+</div>
+{% else %}
+No user have been found.
+{% endfor %}
+{{ pages.view() }}
+<div class="block">
+{% autoescape false %}
+{{ System.image('back.png') }}
+{% endautoescape %} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

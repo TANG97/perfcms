@@ -1,0 +1,25 @@
+{% for news in array %}
+<div class="title"><b>{{ news.name }}</b></div>
+<div class="post">
+<span style="color: grey;">{{ Filters.viewTime(news.time) }}</span><br/>
+{% if image != null %}
+<a href="/cache/news/{{ image }}"><img style="clear:both; float:left; width:150px; margin:10px 20px 20px 0; border:1px solid #e4e4e4;" src="/cache/news/{{ image }}" alt="Image" /></a>
+{% endif %}
+
+{{ Filters.output(news.text)|raw }}
+
+</div>
+<div class="block">
+{{ System.image('nav.png')|raw }} <a href="/news/comments-{{news.id}}">{{ Lang.get('news_comments', 'news') }}</a> ({{comments}})<br/>
+{% if User.level > 1 %}
+{{ System.image('nav.png')|raw }} <a href="/news/edit-{{news.id}}">{{ Lang.get('news_edit_article', 'news') }}</a><br/>
+{% endif %}
+{% if news.category_id !=0 %}
+{{ System.image('back.png')|raw }} <a href="/news/category-{{ news.category_id }}">{{ Lang.get('back') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/news/">{{ Lang.get('news_title', 'news') }}</a><br/>
+{% else %}
+{{ System.image('back.png')|raw }} <a href="/news/">{{ Lang.get('back') }}</a><br/>
+{% endif %}
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>
+{% endfor %}

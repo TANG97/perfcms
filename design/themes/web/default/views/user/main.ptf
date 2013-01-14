@@ -1,0 +1,29 @@
+<div class="title"><b>{{ Lang.get('panel') }}</b></div>
+<div class="menu">
+{% autoescape false %}
+{% set Image %}
+{{System.image('nav.png')}}
+{% endset %} 
+{% endautoescape %}
+{{ Image }} <a href="/user/settings/">{{ Lang.get('general_settings') }}</a>
+</div>
+<div class="menu">
+{{ Image }} <a href="/user/interface/">{{ Lang.get('design_settings') }}</a>
+</div>
+<div class="menu">
+{{ Image }} <a href="/user/editProfile/">{{ Lang.get('edit_profile') }}</a>
+</div>
+<div class="menu">
+{{ Image }} <a href="/user/photo/">{{ Lang.get('edit_avatar') }}</a>
+</div>
+<div class="menu">
+{{ Image }} <a href="/user/security/">{{ Lang.get('security_settings') }}</a>
+</div>
+<div class="menu">
+{{ Image }} <a href="/user/dialogs">{{ Lang.get('dialogs_title', 'dialogs') }}</a>
+</div>
+<div class="block">
+{% autoescape false %}
+{{ System.image('back.png') }}
+{% endautoescape %} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ Lang.getBrowserLanguage }}" lang="{{ Lang.getBrowserLanguage }}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{{ title }}</title>
+		<link rel="shortcut icon" href="{{App.theme.baseUrl}}/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="{{App.theme.baseUrl}}/style.css" type="text/css">
+		<meta name="description" content="{{System.settings['description']}}"/>
+		<meta name="keywords" content="{{System.settings['keywords']}}"/>
+<body>
+<div class="main">
+<div class="logo"><img src="{{App.theme.baseUrl}}/images/logo.png" alt="logo" /></div>
+
+<div class="panel">
+{% if User.loged() %}
+		<a class="panel" href="/user/index">{{ Lang.get('panel') }}</a>
+		{% if System.notifications('mail') > 0 %}
+		<a class="panel" href="/user/dialogs">{{ Lang.get('dialogs_title', 'dialogs') }} +{{ System.notifications('mail') }}</a>
+		{% endif %}
+		{% if User.level() > 1 %}
+		<a class="panel" href="/user/logout?return={{ System.Server('request_uri') }}">{{ Lang.get('logout') }}</a>
+		<a class="panel" href="/padmin/index">{{ Lang.get('padmin_title', 'padmin') }}</a>
+		{% else %}
+		<a class="panel" href="/user/logout?return={{ System.Server('request_uri') }}">{{ Lang.get('logout') }}</a>
+		{% endif %}
+	{% else %}
+		<a class="panel" href="/user/login?return={{ System.Server('request_uri') }}">{{ Lang.get('login') }}</a>
+		<a class="panel" href="/user/register">{{ Lang.get('register') }}</a>
+		<a class="panel" href="/user/recovery">{{ Lang.get('recovery') }}</a>
+{% endif %}
+</div>
+{{ this.widgets('header')|raw }}

@@ -1,0 +1,22 @@
+<?php
+return array(
+	'news_title'			=> "Новини",
+	'news_text'				=> "Текст новини",
+	'news_name'				=> "Заголовок новини",
+	'news_no_articles'		=> "Статтей не знайдено.",
+	'news_category'			=> "Категорія",
+	'news_categories'		=> "Категорії",
+	'news_comments'			=> "Коментарі",
+	'news_no_category'		=> "Без категорії",
+	'news_no_categories'	=> "Немає категорій",
+	'news_add_article'		=> "Створити новину",
+	'news_add_category'		=> "Створити категорію",
+	'news_no_comments'		=> "Коментарі відсутні",
+	'news_comments'			=> "Коментарі",
+	'news_category_name'	=> "Назва категорії",
+	'news_choose_image'		=> "Виберіть зображення",
+	'news_edit_category'	=> "Редагувати категорію",
+	'news_edit_article'		=> "Редагувати запис",
+	'news_delete_article'	=> "Видалити запис",
+	'news_delete_category'	=> "Видалити категорію",
+);

@@ -1,0 +1,11 @@
+<div class="title">{{ Lang.get('forum_add_post', 'forum') }}</div>
+<div class="post">
+	<form action="/forum/posting-{{id}}?add" method="post">
+	{{ System.textarea(6, 28, 'text', reply)|raw }}<br/>
+	<input type="submit" value="{{ Lang.get('add') }}" />
+	</form>
+</div>
+<div class="block">
+{{ System.image('back.png')|raw }} <a href="/forum/topic-{{id}}">{{ Lang.get('back') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

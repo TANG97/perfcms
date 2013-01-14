@@ -1,0 +1,14 @@
+<div class="title">{{ Lang.get('forum_new_posts', 'forum') }}</div>
+{% for post in posts %}
+<div class="post">
+	{{ User.nick(post.user_id)|raw }}
+	{{ Filters.output(post.text)|raw }}
+	<br/>
+	<small class="gray">[{{ Filters.viewTime(post.time) }} / {{ this.topicNew(post.topic_id)|raw }}]</small>
+</div>
+{% endfor %}
+{{ pages.view()|raw }}
+<div class="block">
+{{ System.image('back.png')|raw }} <a href="/forum/">{{ Lang.get('forum_title', 'forum') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

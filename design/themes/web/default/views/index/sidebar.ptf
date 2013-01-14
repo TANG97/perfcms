@@ -1,0 +1,8 @@
+<td style="vertical-align: top;">
+<div class="cabinet">	
+<div class="panel">{{ Lang.get('menu') }}</div>
+{{ this.widgets('menu')|raw }}
+</div>
+</td>
+<td style="vertical-align: top;">
+<div class="content">

@@ -1,0 +1,54 @@
+<div class="title">
+	<b>{{ Lang.get('padmin_design_settings', 'padmin') }}</b>
+</div>
+<div class="menu">
+	<form action="/padmin/index/design?act=save" method="post">
+	{{ Lang.get('padmin_design_def_wap', 'padmin') }}:<br/>
+	<select name="wap_theme">
+		{% for wap in waps %}
+			{% if wap != '.' and wap != '..' and wap !='.htaccess' %}
+
+				<option value="{{ wap }}" {{ Config.wap_theme == wap ? 'selected="selected"' : "" }}>{{ Ini.read('theme_name', 'design/themes/wap/[var]/theme.ini', wap) }}</option>
+			{% endif %}
+		{% endfor %}
+	</select><br/>
+	{{ Lang.get('padmin_design_def_touch', 'padmin') }}:<br/>
+	<select name="touch_theme">
+		{% for touch in touchs %}
+			{% if touch != '.' and touch != '..' and touch !='.htaccess' %}
+			
+				<option value="{{ touch }}" {{ Config.touch_theme == touch ? 'selected="selected"' : "" }}>{{ Ini.read('theme_name', 'design/themes/touch/[var]/theme.ini', touch) }}</option>
+			{% endif %}
+		{% endfor %}
+	</select><br/>
+	{{ Lang.get('padmin_design_def_web', 'padmin') }}:<br/>
+	<select name="web_theme">
+		{% for web in webs %}
+			{% if web != '.' and web != '..' and web !='.htaccess' %}
+			
+				<option value="{{ web }}" {{ Config.web_theme == web ? 'selected="selected"' : "" }}>{{ Ini.read('theme_name', 'design/themes/web/[var]/theme.ini', web) }}</option>
+			{% endif %}
+		{% endfor %}
+	</select><br/>
+	{{ Lang.get('padmin_design_switcher', 'padmin') }}:<br/>
+		<select name="active_switch">
+			<option value="0"{{Config.active_switch==0?' selected="selected"':''}}>{{ Lang.get('padmin_yes', 'padmin') }}</option>
+			<option value="1"{{Config.active_switch==1?' selected="selected"':''}}>{{ Lang.get('padmin_no', 'padmin') }}</option>
+		</select><br/>
+	{{ Lang.get('padmin_design_def_type', 'padmin') }}:<br/>
+		<select name="def_type">
+			<option value="0"{{Config.default_type==0?' selected="selected"':''}}>{{ Lang.get('padmin_design_autotype', 'padmin') }}</option>
+			<option value="1"{{Config.default_type==1?' selected="selected"':''}}> Mobile </option>
+			<!---->
+			<option value="2"{{Config.default_type==2?' selected="selected"':''}}> Touch </option>
+			<!---->
+			<option value="3"{{Config.default_type==3?' selected="selected"':''}}> WEB </option>
+			<!---->
+		</select><br/> 
+	<input type="submit" value="{{Lang.get('save')}}" />
+	</form>
+</div>
+<div class="block">
+	{{ System.image('back.png')|raw }} <a href="/padmin/index">{{ Lang.get('padmin_title', 'padmin') }}</a><br/>
+	{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

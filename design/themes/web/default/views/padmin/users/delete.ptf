@@ -1,0 +1,13 @@
+<div class="title"><b>{{ Lang.get('padmin_users_delete', 'padmin') }}</b></div>
+<div class="post">
+<form action="/padmin/users/delete?id={{user.id}}&amp;delete" method="post">
+{{ Lang.get('padmin_users_delete_note', 'padmin') }}<br/>
+<input type="submit" value="{{ Lang.get('no') }}" />
+<input type="submit" name="delete_this" value="{{ Lang.get('yes') }}" />
+</form>
+</div>
+<div class="block">
+	{{ System.image('back.png')|raw }} <a href="/padmin/users/index">{{ Lang.get('padmin_users_manager', 'padmin') }}</a><br/>
+	{{ System.image('back.png')|raw }} <a href="/padmin/index">{{ Lang.get('padmin_title', 'padmin') }}</a><br/>
+	{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

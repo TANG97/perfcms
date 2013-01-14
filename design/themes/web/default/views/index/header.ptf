@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ Lang.getBrowserLanguage }}" xml:lang="{{ Lang.getBrowserLanguage }}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>{{ title }}</title>
+		<link rel="shortcut icon" href="{{App.theme.baseUrl}}/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="{{App.theme.baseUrl}}/style.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/tooltips.css" type="text/css"/>
+		<meta name="description" content="{{System.settings['description']}}" />
+		<meta name="keywords" content="{{System.settings['keywords']}}" />
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="/assets/js/jquery.tools.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+			$("#mainContentWrapper a[title]").tooltip();
+			$("#mainContentWrapper abbr[title]").tooltip();
+			$("#mainContentWrapper img[title]").tooltip();
+			});
+		</script>
+		</head>
+<body>
+<div id="mainContentWrapper" class="main">
+<div class="head"><a href="/"><img src="{{App.theme.baseUrl}}/images/logo.png" alt="logo" /></a>
+		   <div class="navg">
+			   {% if System.Server('request_uri') == '/' or System.Server('request_uri') == '/index.php' %}
+					{% if System.backlink() !=false %}
+						<span class="navg1">{{ System.backlink()|raw }}</span>
+						<span class="navg2"><a href="/index/language">{{ Lang.get(System.CurrentLang(), 'languages')|title }}</a></span>
+					{% else %}
+						<span class="navg3"><a href="/index/language">{{ Lang.get(System.CurrentLang(), 'languages')|title }}</a></span>
+					{% endif %}
+			   {% else %}
+			    <span class="navg1"><a href="/">{{ Lang.get('mainpage') }}</a></span>
+				{% if System.backlink() !=false %}
+					<span class="navg">{{ System.backlink()|raw }}</span>
+				{% endif %}
+				<span class="navg2"><a href="/index/language">{{ Lang.get(System.CurrentLang(), 'languages')|title }}</a></span>
+			   {% endif %}
+           </div>
+</div>
+<div class="perfcms">
+	{% if User.loged() %}
+		<span class="navg1"><a href="/user/index">{{ Lang.get('panel') }}</a></span>
+		{% if System.notifications('mail') > 0 %}
+		<span class="navg"><a href="/user/dialogs">{{ Lang.get('dialogs_title', 'dialogs') }} +{{ System.notifications('mail') }}</a></span>
+		{% endif %}
+		{% if User.level() > 1 %}
+			<span class="navg"><a href="/user/logout?return={{ System.Server('request_uri') }}">{{ Lang.get('logout') }}</a></span>
+			<span class="navg2"><a href="/padmin/index">{{ Lang.get('padmin_title', 'padmin') }}</a></span>
+		{% else %}
+			<span class="navg2"><a href="/user/logout?return={{ System.Server('request_uri') }}">{{ Lang.get('logout') }}</a></span>
+		{% endif %}
+	{% else %}
+		<span class="navg1"><a href="/user/login?return={{ System.Server('request_uri') }}">{{ Lang.get('login') }}</a></span>
+		<span class="navg"><a href="/user/register">{{ Lang.get('register') }}</a></span>
+		<span class="navg2"><a href="/user/recovery">{{ Lang.get('recovery') }}</a></span>
+	{% endif %}
+</div>
+{{ this.widgets('header')|raw }}
+<table>
+<tr>
+	{% include 'views/index/sidebar.ptf' %}

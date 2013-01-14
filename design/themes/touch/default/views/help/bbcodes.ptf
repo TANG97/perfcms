@@ -1,0 +1,20 @@
+<div class="title"><b>{{ Lang.get('smiles') }}</b></div>
+<div class="post">
+[b]Bold[/b] - {{ Filters.output('[b]Bold text[/b]')|raw }}<br/>
+[s]Bold[/s] - {{ Filters.output('[s]Striked text[/s]')|raw }}<br/>
+[u]Bold[/u] - {{ Filters.output('[u]Underline text[/u]')|raw }}<br/>
+[i]Bold[/i] - {{ Filters.output('[i]Italic text[/i]')|raw }}<br/>
+[color=any html color]Colored text[/color] - {{ Filters.output('[color=gray]Colored text[/color]')|raw }}<br/>
+[quote]Quoted text[/quote] - {{ Filters.output('[quote]Quoted text[/quote]')|raw }}<br/>
+[acronym=Title of acronym]Acronym[/acronym] - {{ Filters.output('[acronym=yet another acronym]YAA[/acronym]')|raw }}<br/>
+[source lang=any language from this:php ,html, css, javascript, sql, xml, ruby, perl, mysql, java, python, sh, cpp, abap, diff, dtd, vbscript]Your code[/source] - {{ Filters.output('[source lang=php]<?php
+echo "Hello world";
+?>[/source]')|raw }}<br/>
+[url=url of site]Name of link[/url] - {{ Filters.output('[url=http://perfcms.org.ua]Link[/url]')|raw}}<br/>
+[spoiler]Hidden text, video or image[/spoiler] - {{ Filters.output('[spoiler]Hidden text, video or image[/spoiler]')|raw}}<br/>
+[video]ID of video from YouTube (e.g.:yKDBojlncss)[/video] - {{ Filters.output('[video]yKDBojlncss[/video]')|raw}}<br/>
+</div>
+<div class="block">
+{{ System.image('back.png')|raw }} <a href="/help">{{ Lang.get('back') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

@@ -1,0 +1,17 @@
+<div class="title">{{ Lang.get('forum_edit', 'forum') }}</div>
+<form action="/forum/topic_actions-{{ topic.id }}?do=edit&save" method="post">
+{{ Lang.get('forum_name', 'forum') }}:<br/>
+<input type="text" value="{{topic.name}}" value="{{topic.desc}}" name="name" /><br/>
+{{ Lang.get('forum_move_to', 'forum') }}:<br/>
+<select name="section">
+{% for section in sections %}
+<option value="{{ section.id}}"{% if section.id == topic.cat_id %} selected="selected"{% endif %}>{{ section.name }}</option>
+{% endfor %}
+</select><br/>
+<input type="submit" value="{{ Lang.get('save') }}" />
+</form>
+<div class="block">
+{{ System.image('back.png')|raw }} <a href="/forum/forum-{{topic.cat}}">{{ Lang.get('back') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/forum/">{{ Lang.get('forum_title', 'forum') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

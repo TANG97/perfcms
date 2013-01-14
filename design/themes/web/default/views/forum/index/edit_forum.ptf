@@ -1,0 +1,12 @@
+<div class="title">{{ Lang.get('forum_edit_forum', 'forum') }}</div>
+<form action="/forum/actions-{{ forum.id }}?do=edit&save" method="post">
+{{ Lang.get('forum_name', 'forum') }}:<br/>
+<input type="text" value="{{forum.name}}" value="{{forum.desc}}" name="name" /><br/>
+{{ Lang.get('forum_desc', 'forum') }}:<br/>
+<input type="text" value="{{forum.desc}}" name="desc" /><br/>
+<input type="submit" value="{{ Lang.get('save') }}" />
+</form>
+<div class="block">
+{{ System.image('back.png')|raw }} <a href="/forum/">{{ Lang.get('forum_title', 'forum') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

@@ -1,0 +1,14 @@
+<div class="title">
+	<b>{{ Lang.get('padmin_system_info', 'padmin') }}</b>
+</div>
+<div class="menu">
+	<b>{{ Lang.get('padmin_info_perf_ver', 'padmin') }}</b>: {{ System.getVersion() }}<br/>
+	<b>{{ Lang.get('padmin_info_last_perf_ver', 'padmin') }}</b>: {{ System.getVersion() }}<br/>
+	<b>{{ Lang.get('padmin_info_yii_version', 'padmin') }}</b>: {{ YiiVersion }}<br/>
+	<b>{{ Lang.get('padmin_info_php_version', 'padmin') }}</b>: {{ PHPVersion }}<br/>
+	<b>{{ Lang.get('padmin_info_server', 'padmin') }}</b>: {{ server_software[0] }} {{ server_software[1] }}<br/>
+</div>
+<div class="block">
+	{{ System.image('back.png')|raw }} <a href="/padmin/index">{{ Lang.get('padmin_title', 'padmin') }}</a><br/>
+	{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>

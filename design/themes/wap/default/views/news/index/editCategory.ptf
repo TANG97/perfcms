@@ -1,0 +1,14 @@
+<div class="title"><b>{{ Lang.get('news_edit_category', 'news') }}</b></div>
+<div class="menu">
+<form action="/news/editcat-{{category.id}}?save" method="post">
+{{ Lang.get('news_category_name', 'news') }}:<br/>
+<input type="text" value="{{category.name|raw}}" name="name"/><br/>
+<input type="submit" value="{{ Lang.get('save') }}" />
+</form>
+</div>
+
+<div class="block">
+{{ System.image('nav.png')|raw }} <a href="/news/editcat-{{category.id}}?delete">{{ Lang.get('news_delete_category', 'news') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/news/index">{{ Lang.get('news_title', 'news') }}</a><br/>
+{{ System.image('back.png')|raw }} <a href="/">{{ Lang.get('mainpage') }}</a>
+</div>
