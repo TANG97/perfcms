@@ -9,7 +9,7 @@ class IndexController extends Controller
 	public function actionIndex()
 	{
 		$db = Yii::app()->db->createCommand();
-		$this->getHeader(array('title' => lang::get('forum_title', 'forum')));
+		$this->getHeader(array('title' => Lang::get('forum_title', 'forum')));
 		$forums = $db->select()->from('forum')->order('pos')->queryAll();
 		$this->render('main', array('forums' => $forums));
 		$this->getFooter();
@@ -25,8 +25,8 @@ class IndexController extends Controller
 		$db = Yii::app()->db->createCommand();
 		if(isset($_GET['add']) && !empty($_POST['name']))
 		{
-			$name = filters::input($_POST['name']);
-			$desc = (!empty($_POST['desc']) ? filters::input($_POST['desc']) : '');
+			$name = Filters::input($_POST['name']);
+			$desc = (!empty($_POST['desc']) ? Filters::input($_POST['desc']) : '');
 			if(!empty($name))
 			{
 				$pos = PerfDb::init()->query("SELECT id FROM `forum`")->rowCount();
@@ -34,7 +34,7 @@ class IndexController extends Controller
 				$this->redirect('/forum/');
 			}
 		}
-		$this->getHeader(array('title' => lang::get('forum_add', 'forum')));
+		$this->getHeader(array('title' => Lang::get('forum_add', 'forum')));
 		$this->render('add');
 		$this->getFooter();
 	}
@@ -42,20 +42,20 @@ class IndexController extends Controller
 	public function actionForum()
 	{
 		$db = PerfDb::init();
-		if(!isset($_GET['id']) or $db->query("SELECT * FROM `forum` WHERE `id` = '".filters::num($_GET['id'])."'")->rowCount() == 0)
+		if(!isset($_GET['id']) or $db->query("SELECT * FROM `forum` WHERE `id` = '".Filters::num($_GET['id'])."'")->rowCount() == 0)
 		{
 			$this->redirect('/forum/');
 		}
 		
-		$forumsNum = $db->query("SELECT * FROM `forum_c` WHERE `f_id` = '".filters::num($_GET['id'])."'")->rowCount();
+		$forumsNum = $db->query("SELECT * FROM `forum_c` WHERE `f_id` = '".Filters::num($_GET['id'])."'")->rowCount();
 		$pages = new Paginator($forumsNum, System::pages());
 		global $start;
 		
-		$forums = $db->query("SELECT * FROM `forum_c` WHERE `f_id` = '".filters::num($_GET['id'])."' ORDER BY pos DESC LIMIT $start, ".System::pages()."");
+		$forums = $db->query("SELECT * FROM `forum_c` WHERE `f_id` = '".Filters::num($_GET['id'])."' ORDER BY pos DESC LIMIT $start, ".System::pages()."");
 		
-		$this->getHeader(array('title' => $db->query("SELECT name FROM `forum` WHERE `id` = '".filters::num($_GET['id'])."'")->fetchColumn() .' - '. Lang::get('forum_title', 'forum')));
+		$this->getHeader(array('title' => $db->query("SELECT name FROM `forum` WHERE `id` = '".Filters::num($_GET['id'])."'")->fetchColumn() .' - '. Lang::get('forum_title', 'forum')));
 		
-		$this->render('forum', array('forums' => $forums, 'forum_title' => $db->query("SELECT name FROM `forum` WHERE `id` = '".filters::num($_GET['id'])."'")->fetchColumn(), 'fid'=>filters::num($_GET['id']), 'pages' => $pages));
+		$this->render('forum', array('forums' => $forums, 'forum_title' => $db->query("SELECT name FROM `forum` WHERE `id` = '".Filters::num($_GET['id'])."'")->fetchColumn(), 'fid'=>Filters::num($_GET['id']), 'pages' => $pages));
 		
 		$this->getFooter();
 	}
@@ -79,17 +79,17 @@ class IndexController extends Controller
 		$db = Yii::app()->db->createCommand();
 		if(isset($_GET['add']) && !empty($_POST['name']))
 		{
-			$name = filters::input($_POST['name']);
-			$desc = (!empty($_POST['desc']) ? filters::input($_POST['desc']) : '');
+			$name = Filters::input($_POST['name']);
+			$desc = (!empty($_POST['desc']) ? Filters::input($_POST['desc']) : '');
 			if(!empty($name))
 			{
 				$pos = PerfDb::init()->query("SELECT id FROM `forum`")->rowCount();
-				$db->insert('forum_c', array('name' => $name, 'desc' => $desc, 'f_id' => filters::num($_GET['id']), 'pos' => $pos+1));
-				$this->redirect('/forum/forum-'.filters::num($_GET['id']));
+				$db->insert('forum_c', array('name' => $name, 'desc' => $desc, 'f_id' => Filters::num($_GET['id']), 'pos' => $pos+1));
+				$this->redirect('/forum/forum-'.Filters::num($_GET['id']));
 			}
 		}
-		$this->getHeader(array('title' => lang::get('forum_add', 'forum')));
-		$this->render('add_section', array('fid' => filters::num($_GET['id'])));
+		$this->getHeader(array('title' => Lang::get('forum_add', 'forum')));
+		$this->render('add_section', array('fid' => Filters::num($_GET['id'])));
 		$this->getFooter();
 	}
 	
@@ -97,13 +97,13 @@ class IndexController extends Controller
 	{
 		$db = PerfDb::init();
 		$lang = new Lang;
-		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_c` WHERE `id` = '". filters::num($_GET['id']) ."'")->rowCount() != 1)
+		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_c` WHERE `id` = '". Filters::num($_GET['id']) ."'")->rowCount() != 1)
 		{
 			$this->redirect('/forum/');
 		}
-		$id = filters::num($_GET['id']);
+		$id = Filters::num($_GET['id']);
 		
-		$forumsNum = $db->query("SELECT * FROM `forum_t` WHERE `cat_id` = '". filters::num($_GET['id']) ."'")->rowCount();
+		$forumsNum = $db->query("SELECT * FROM `forum_t` WHERE `cat_id` = '". Filters::num($_GET['id']) ."'")->rowCount();
 		$pages = new Paginator($forumsNum, System::pages());
 		global $start;
 		
@@ -131,8 +131,8 @@ class IndexController extends Controller
 		$db = PerfDb::init();
 		if($tid !='')
 		{
-			$_info = $db->query("SELECT * FROM `forum_pt` WHERE `topic_id` = '".filters::num($tid)."' ORDER BY time DESC LIMIT 1")->fetch();
-			return '[<small class="gray">'.User::tnick($_info['user_id']).' / '. filters::viewTime($_info['time']).'</small>]';
+			$_info = $db->query("SELECT * FROM `forum_pt` WHERE `topic_id` = '".Filters::num($tid)."' ORDER BY time DESC LIMIT 1")->fetch();
+			return '[<small class="gray">'.User::tnick($_info['user_id']).' / '. Filters::viewTime($_info['time']).'</small>]';
 		}
 	}
 	
@@ -146,19 +146,19 @@ class IndexController extends Controller
 			$this->redirect('/forum/');
 		}
 		
-		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_c` WHERE `id` = '". filters::num($_GET['id']) ."'")->rowCount() != 1)
+		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_c` WHERE `id` = '". Filters::num($_GET['id']) ."'")->rowCount() != 1)
 		{
 			$this->redirect('/forum/');
 		}
 		
-		$id = filters::num($_GET['id']);
+		$id = Filters::num($_GET['id']);
 		$error = false;
 		if(isset($_GET['add']))
 		{
 			if(isset($_POST['name']) && isset($_POST['text']))
 			{
-				$name = filters::input($_POST['name']);
-				$text = filters::input($_POST['text']);
+				$name = Filters::input($_POST['name']);
+				$text = Filters::input($_POST['text']);
 				
 				if(empty($name))
 				{
@@ -197,12 +197,12 @@ class IndexController extends Controller
 	{
 		$db = PerfDb::init();
 		$lang = new Lang;
-		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_t` WHERE `id` = '".filters::num($_GET['id'])."'")->rowCount() != 1)
+		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_t` WHERE `id` = '".Filters::num($_GET['id'])."'")->rowCount() != 1)
 		{
 			$this->redirect('/index/error');
 		}
 		
-		$id = filters::num($_GET['id']);
+		$id = Filters::num($_GET['id']);
 		
 		$postsNum = $db->query("SELECT * FROM `forum_pt` WHERE `topic_id` = '". $id ."'")->rowCount();
 		$pages = new Paginator($postsNum, System::pages());
@@ -261,12 +261,12 @@ class IndexController extends Controller
 		$db = PerfDb::init();
 		$lang = new Lang;
 		
-		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_t` WHERE `id` = '". filters::num($_GET['id'])."'")->rowCount() !=1 || !User::loged())
+		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_t` WHERE `id` = '". Filters::num($_GET['id'])."'")->rowCount() !=1 || !User::loged())
 		{
 			$this->redirect('/index/error');
 		}
 		
-		$id = filters::num($_GET['id']);
+		$id = Filters::num($_GET['id']);
 		
 		if($db->query("SELECT closed FROM `forum_t` WHERE `id` = '$id'")->fetchColumn() != 0)
 		{
@@ -275,7 +275,7 @@ class IndexController extends Controller
 		
 		if(isset($_GET['add']))
 		{
-			$text = mb_substr(filters::input($_POST['text']), 0, 10000);
+			$text = mb_substr(Filters::input($_POST['text']), 0, 10000);
 			if(!empty($text) && $db->query("SELECT * FROM `forum_pt` WHERE `time` > '". (time()-15) ."' AND `text` = '$text'")->rowCount() == 0)
 			{
 				$db->query("INSERT INTO `forum_pt` SET `text` = '$text', `time` = '". time() ."', `user_id` = '".User::Id()."', `topic_id` = '".$id."', `file` = '', `file_size` = '0', `edit_time` = '0', `edit_user_id` = '0', `count_edit` = '0', `cat_id` = '0', `name` = ''");
@@ -293,14 +293,14 @@ class IndexController extends Controller
 		$r = false;
 		if(isset($_GET['to_id']) && !empty($_GET['to_id']))
 		{
-			$r = '[b]'.User::tnick(filters::num($_GET['to_id'])).'[/b], ';
+			$r = '[b]'.User::tnick(Filters::num($_GET['to_id'])).'[/b], ';
 		}
 		elseif(isset($_GET['quote_id']) && !empty($_GET['quote_id']))
 		{
-			$q_p = $db->query("SELECT `text` FROM `forum_pt` WHERE `id`='". filters::num($_GET['quote_id'])."'")->fetchColumn();
-			$q_t = $db->query("SELECT `time` FROM `forum_pt` WHERE `id`='". filters::num($_GET['quote_id'])."'")->fetchColumn();
-			$q_u = $db->query("SELECT `user_id` FROM `forum_pt` WHERE `id`='". filters::num($_GET['quote_id'])."'")->fetchColumn();
-			$r = "[quote][i][b]".User::tnick($q_u)."[/b] (".filters::viewTime($q_t).")[/i]\n$q_p\n[/quote]\n";
+			$q_p = $db->query("SELECT `text` FROM `forum_pt` WHERE `id`='". Filters::num($_GET['quote_id'])."'")->fetchColumn();
+			$q_t = $db->query("SELECT `time` FROM `forum_pt` WHERE `id`='". Filters::num($_GET['quote_id'])."'")->fetchColumn();
+			$q_u = $db->query("SELECT `user_id` FROM `forum_pt` WHERE `id`='". Filters::num($_GET['quote_id'])."'")->fetchColumn();
+			$r = "[quote][i][b]".User::tnick($q_u)."[/b] (".Filters::viewTime($q_t).")[/i]\n$q_p\n[/quote]\n";
 		}
 		
 		$this->getHeader($lang::get('forum_add_post', 'forum').' - '.$db->query("SELECT `name` FROM `forum_t` WHERE `id` = '".$id."'")->fetchColumn().' - '.$lang::get('forum_title', 'forum'));
@@ -315,14 +315,14 @@ class IndexController extends Controller
 		$db = PerfDb::init();
 		$lang = new Lang;
 		
-		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_pt` WHERE `id` = '". filters::num($_GET['id'])."'")->rowCount() != 1)
+		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_pt` WHERE `id` = '". Filters::num($_GET['id'])."'")->rowCount() != 1)
 		{
 			$this->redirect('/index/error/');
 		}
 		
-		$id = filters::num($_GET['id']);
+		$id = Filters::num($_GET['id']);
 		
-		$postData = $db->query("SELECT * FROM `forum_pt` WHERE `id` = '". filters::num($_GET['id'])."'")->fetch();
+		$postData = $db->query("SELECT * FROM `forum_pt` WHERE `id` = '". Filters::num($_GET['id'])."'")->fetch();
 		
 		if(User::level() < 1 || User::Id() != $postData['user_id'])
 		{
@@ -340,7 +340,7 @@ class IndexController extends Controller
 			}
 			elseif($_GET['action'] == 'edit')
 			{				
-				$text = mb_substr(filters::input($_POST['text']), 0, 10000);
+				$text = mb_substr(Filters::input($_POST['text']), 0, 10000);
 				if(!empty($text))
 				{
 					$db->query("UPDATE `forum_pt` SET `text` = '$text', `edit_time` = '". time() ."', `edit_user_id` = '". User::Id()."', `count_edit` = '". ($postData['count_edit']+1) ."' WHERE `id` = '$id'");
@@ -357,14 +357,14 @@ class IndexController extends Controller
 	public function actionTopic_actions()
 	{
 		$db = PerfDb::init();
-		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_t` WHERE `id` = '". filters::num($_GET['id']) ."'")->rowCount() !=1 || !User::loged())
+		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_t` WHERE `id` = '". Filters::num($_GET['id']) ."'")->rowCount() !=1 || !User::loged())
 		{
 			$this->redirect('/index/error');
 		}
 		
-		$topic = $db->query("SELECT * FROM `forum_t` WHERE `id` = '". filters::num($_GET['id']) ."'")->fetch();
+		$topic = $db->query("SELECT * FROM `forum_t` WHERE `id` = '". Filters::num($_GET['id']) ."'")->fetch();
 		
-		switch(filters::input($_GET['do']))
+		switch(Filters::input($_GET['do']))
 		{
 			case 'close':
 				if(User::level() > 1 || User::Id() == $topic['user_id'])
@@ -451,14 +451,14 @@ class IndexController extends Controller
 	public function actionSection_actions()
 	{
 		$db = PerfDb::init();
-		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_c` WHERE `id` = '".filters::num($_GET['id'])."'")->rowCount() !=1 || User::level() < 2)
+		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum_c` WHERE `id` = '".Filters::num($_GET['id'])."'")->rowCount() !=1 || User::level() < 2)
 		{
-			$this->redirect('/forum/section-'.filters::num($_GET['id']));
+			$this->redirect('/forum/section-'.Filters::num($_GET['id']));
 		}
 		
-		$section = $db->query("SELECT * FROM `forum_c` WHERE `id` = '".filters::num($_GET['id'])."'")->fetch();
+		$section = $db->query("SELECT * FROM `forum_c` WHERE `id` = '".Filters::num($_GET['id'])."'")->fetch();
 		
-		switch(filters::input($_GET['do']))
+		switch(Filters::input($_GET['do']))
 		{
 			
 			case 'edit':
@@ -469,7 +469,7 @@ class IndexController extends Controller
 					$forum = Filters::num($_POST['forum']);
 					if(!empty($name) && !empty($desc) && $db->query("SELECT * FROM `forum` WHERE `id` = '".$forum."'")->rowCount() !=0)
 					{
-						$db->query("UPDATE `forum_c` SET `name` = '".$name."', `desc` = '".$desc."', `f_id` = '".$forum."' WHERE `id` = '".filters::num($_GET['id'])."'");
+						$db->query("UPDATE `forum_c` SET `name` = '".$name."', `desc` = '".$desc."', `f_id` = '".$forum."' WHERE `id` = '".Filters::num($_GET['id'])."'");
 						$this->redirect('/forum/forum-'.$forum);
 					}
 				}
@@ -500,7 +500,7 @@ class IndexController extends Controller
 			break;
 						
 			default:
-				$this->redirect('/forum/section-'.filters::num($_GET['id']));
+				$this->redirect('/forum/section-'.Filters::num($_GET['id']));
 			break;
 		}
 	}
@@ -508,14 +508,14 @@ class IndexController extends Controller
 	public function actionActions()
 	{
 		$db = PerfDb::init();
-		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum` WHERE `id` = '".filters::num($_GET['id'])."'")->rowCount() !=1 || User::level() < 2)
+		if(!isset($_GET['id']) || $db->query("SELECT * FROM `forum` WHERE `id` = '".Filters::num($_GET['id'])."'")->rowCount() !=1 || User::level() < 2)
 		{
-			$this->redirect('/forum/forum-'.filters::num($_GET['id']));
+			$this->redirect('/forum/forum-'.Filters::num($_GET['id']));
 		}
 		
-		$forum = $db->query("SELECT * FROM `forum` WHERE `id` = '".filters::num($_GET['id'])."'")->fetch();
+		$forum = $db->query("SELECT * FROM `forum` WHERE `id` = '".Filters::num($_GET['id'])."'")->fetch();
 		
-		switch(filters::input($_GET['do']))
+		switch(Filters::input($_GET['do']))
 		{
 			
 			case 'edit':
@@ -525,7 +525,7 @@ class IndexController extends Controller
 					$desc = Filters::input($_POST['desc']);
 					if(!empty($name) && !empty($desc))
 					{
-						$db->query("UPDATE `forum` SET `name` = '".$name."', `desc` = '".$desc."' WHERE `id` = '".filters::num($_GET['id'])."'");
+						$db->query("UPDATE `forum` SET `name` = '".$name."', `desc` = '".$desc."' WHERE `id` = '".Filters::num($_GET['id'])."'");
 						$this->redirect('/forum/');
 					}
 				}
@@ -559,7 +559,7 @@ class IndexController extends Controller
 			break;
 						
 			default:
-				$this->redirect('/forum/section-'.filters::num($_GET['id']));
+				$this->redirect('/forum/section-'.Filters::num($_GET['id']));
 			break;
 		}
 	}

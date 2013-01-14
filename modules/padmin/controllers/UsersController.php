@@ -31,7 +31,7 @@ class UsersController extends Controller
 			exit;
 		}
 		
-		$id = filters::num($_GET['id']);
+		$id = Filters::num($_GET['id']);
 		$lang = new Lang;
 		$db = PerfDb::init();
 		$user = $db->query("SELECT * FROM `users` WHERE `id` = '$id' LIMIT 1")->fetch();
@@ -77,7 +77,7 @@ class UsersController extends Controller
 			exit;
 		}
 		
-		$id = filters::num($_GET['id']);
+		$id = Filters::num($_GET['id']);
 		$lang = new Lang;
 		$db = PerfDb::init();
 		$user = $db->query("SELECT * FROM `users` WHERE `id` = '$id' LIMIT 1")->fetch();
@@ -117,7 +117,7 @@ class UsersController extends Controller
 			exit;
 		}
 		
-		$id = filters::num($_GET['id']);
+		$id = Filters::num($_GET['id']);
 		$lang = new Lang;
 		$db = PerfDb::init();
 		$user = $db->query("SELECT * FROM `users` WHERE `id` = '$id' LIMIT 1")->fetch();
@@ -158,7 +158,7 @@ class UsersController extends Controller
 			exit;
 		}
 		
-		$id = filters::num($_GET['id']);
+		$id = Filters::num($_GET['id']);
 		$lang = new Lang;
 		$db = PerfDb::init();
 		$user = $db->query("SELECT * FROM `users` WHERE `id` = '$id' LIMIT 1")->fetch();
@@ -172,9 +172,9 @@ class UsersController extends Controller
 		if(isset($_GET['block']))
 		{
 			$uset = EditProfile::model()->findByPk($id);
-			$block = substr(filters::num($_POST['time']), 0, 3);
+			$block = substr(Filters::num($_POST['time']), 0, 3);
 			$uset->ban_time = time()+60*60*24*$block;
-			$uset->ban_text = filters::input($_POST['info']);
+			$uset->ban_text = Filters::input($_POST['info']);
 			$uset->save();
 			header('location: /padmin/users/index');
 			exit;

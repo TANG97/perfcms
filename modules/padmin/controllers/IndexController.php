@@ -118,14 +118,14 @@ class IndexController extends Controller
 	
 	public function actionThemes()
 	{
-		$this->getHeader(lang::get('padmin_themes_manager', 'padmin'));
+		$this->getHeader(Lang::get('padmin_themes_manager', 'padmin'));
 		$this->render('themes');
 		$this->getFooter();
 	}
 	
 	public function listOfThemes()
 	{
-		echo '<div class="post"><a href="/padmin/index/themes?wap"><b>'.lang::get('padmin_themes_wap', 'padmin').'</b></a></br/>';
+		echo '<div class="post"><a href="/padmin/index/themes?wap"><b>'.Lang::get('padmin_themes_wap', 'padmin').'</b></a></br/>';
 		if(isset($_GET['wap']))
 		{
 			$wapThemesDir = scandir(APP_ROOT.'/design/themes/wap');
@@ -142,7 +142,7 @@ class IndexController extends Controller
 		}
 		echo '</div>';
 		
-		echo '<div class="post"><a href="/padmin/index/themes?touch"><b>'.lang::get('padmin_themes_touch', 'padmin').'</b></a><br/>';
+		echo '<div class="post"><a href="/padmin/index/themes?touch"><b>'.Lang::get('padmin_themes_touch', 'padmin').'</b></a><br/>';
 		if(isset($_GET['touch']))
 		{
 			$touchThemesDir = scandir(APP_ROOT.'/design/themes/touch');
@@ -159,7 +159,7 @@ class IndexController extends Controller
 		}
 		echo '</div>';
 		
-		echo '<div class="post"><a href="/padmin/index/themes?web"><b>'.lang::get('padmin_themes_web', 'padmin').'</b></a><br/>';
+		echo '<div class="post"><a href="/padmin/index/themes?web"><b>'.Lang::get('padmin_themes_web', 'padmin').'</b></a><br/>';
 		if(isset($_GET['web']))
 		{
 			$webThemesDir = scandir(APP_ROOT.'/design/themes/web');
@@ -241,7 +241,7 @@ class IndexController extends Controller
 			}
 		}
 		
-		$this->getHeader(lang::get('padmin_themes_manager', 'padmin'));
+		$this->getHeader(Lang::get('padmin_themes_manager', 'padmin'));
 		$this->render('install_theme');
 		$this->getFooter();
 	}

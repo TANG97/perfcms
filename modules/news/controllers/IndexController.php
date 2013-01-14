@@ -91,7 +91,7 @@ class IndexController extends Controller
 		$newsImage = (file_exists(APP_ROOT.'/cache/news/'.Filters::num($_GET['id']).'.jpg') ? Filters::num($_GET['id']).'.jpg' : null);
 		$getComments = $db->query("SELECT * FROM `news_comments` WHERE `news_id` = '".Filters::num($_GET['id'])."'")->rowCount();
 		$array = $db->query("SELECT * FROM `news` WHERE `id` = '".Filters::num($_GET['id'])."'");
-		$this->getHeader(array('title' => $newsName), '/news/article-'.filters::num($_GET['id']).'::news_location');
+		$this->getHeader(array('title' => $newsName), '/news/article-'.Filters::num($_GET['id']).'::news_location');
 		$this->render('article', array('array' => $array, 'image' => $newsImage, 'comments' => $getComments));
 		$this->getFooter();
 	}
@@ -247,14 +247,14 @@ class IndexController extends Controller
 	public function actionComments()
 	{
 		$lang = new lang;
-		$db = perfdb::init();
-		$id = filters::num($_GET['id']);
+		$db = PerfDb::init();
+		$id = Filters::num($_GET['id']);
 		$usr = new User();
 		if(isset($_GET['comment']) && $usr->loged())
 		{
 			if($_GET['comment'] == 'add' && !empty($_POST['text']))
 			{
-				$text = filters::input($_POST['text']);
+				$text = Filters::input($_POST['text']);
 				$time = time();
 				$user_id = $usr->Id();
 				$db->query("INSERT INTO `news_comments` SET `user_id` = '$user_id', `text` = '$text', `time` = '$time', `news_id` = '$id'");
@@ -263,7 +263,7 @@ class IndexController extends Controller
 			}
 			elseif($_GET['comment'] == 'delete' && isset($_GET['this_id']))
 			{
-				$this_id = filters::num($_GET['this_id']);
+				$this_id = Filters::num($_GET['this_id']);
 				$db->query("DELETE FROM `news_comments` WHERE `id` = '$this_id'");
 				header('location: /news/comments-'.$id);
 				exit;

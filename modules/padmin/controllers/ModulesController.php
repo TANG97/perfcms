@@ -170,7 +170,7 @@ class ModulesController extends Controller
 			}
 		}
 			
-		$this->getHeader(lang::get('padmin_modules_install', 'padmin'));
+		$this->getHeader(Lang::get('padmin_modules_install', 'padmin'));
 		$this->render('install', array('errors' => $moduleError));
 		$this->getFooter();
 	}	

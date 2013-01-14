@@ -13,7 +13,7 @@ class IndexController extends Controller
 		$db = PerfDb::init();
 		if(isset($_GET['add']))
 		{
-			$text = (!empty($_POST['text']) ? filters::input($_POST['text']) : null);
+			$text = (!empty($_POST['text']) ? Filters::input($_POST['text']) : null);
 			if($text != null)
 			{
 				$user_id	= $usr::Id();
@@ -31,7 +31,7 @@ class IndexController extends Controller
 		}
 		elseif(isset($_GET['delete_message']) && !empty($_GET['this_id']) && $usr->level() > 1)
 		{
-			$this_id = filters::num($_GET['this_id']);
+			$this_id = Filters::num($_GET['this_id']);
 			$db->query("DELETE FROM `minichat` WHERE `id` = '$this_id'");
 			header('location: /minichat');
 			exit;

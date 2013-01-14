@@ -9,7 +9,7 @@ class UserController extends Controller
 	public function actionIndex()
 	{
 		$user = new User;
-		if(!$user->loged())
+		if(!$user::loged())
 		{
 			header('location: /');
 			exit();
@@ -24,7 +24,7 @@ class UserController extends Controller
 	{
 		$user = new User;
 		
-		if(!$user->loged())
+		if(!$user::loged())
 		{
 			header('location: /');
 			exit();
@@ -56,7 +56,7 @@ class UserController extends Controller
 	public function actionEditProfile()
 	{
 		$user = new User;
-		if(!$user->loged())
+		if(!$user::loged())
 		{
 			header('location: /');
 			exit();
@@ -117,7 +117,7 @@ class UserController extends Controller
 	public function actionPhoto()
 	{
 		$user = new User();
-		if(!$user->loged())
+		if(!$user::loged())
 		{
 			header('location: /');
 			exit();
@@ -252,12 +252,12 @@ class UserController extends Controller
 		$error = false;
 		if(isset($_GET['finaly']))
 		{
-			$nick = filters::input($_POST['nickname']);
-			$name = filters::input($_POST['name']);
-			$password = filters::input($_POST['password']);
-			$repassword = filters::input($_POST['repassword']);
-			$email = filters::input($_POST['email']);
-			$gender = filters::num($_POST['gender']);
+			$nick = Filters::input($_POST['nickname']);
+			$name = Filters::input($_POST['name']);
+			$password = Filters::input($_POST['password']);
+			$repassword = Filters::input($_POST['repassword']);
+			$email = Filters::input($_POST['email']);
+			$gender = Filters::num($_POST['gender']);
 			if(empty($nick) || mb_strlen($nick) < 3 || mb_strlen($nick) > 25 || !preg_match('/[a-zA-Zа-яА-Я0-9\_\-\@\.]/i', $nick))
 			{
 				$error .= $lang::get('register_nick_error');
@@ -293,7 +293,7 @@ class UserController extends Controller
 			
 			if($error == false)
 			{
-				$pass = filters::crypt($password);
+				$pass = Filters::crypt($password);
 				$conf = System::getSettings();
 				$db->query("INSERT INTO `users` SET 
 				`name` = '$name', 
@@ -390,7 +390,7 @@ class UserController extends Controller
 				{
 					$err = 'Passwords not true';
 				}
-				if($cPass != $user->data['password'])
+				if($cPass != $user::date['password'])
 				{
 					$err .= 'Not true current Passwords';
 				}
@@ -412,11 +412,11 @@ class UserController extends Controller
 				$nMail = Filters::input($_POST['new_email']);
 				$cMail = Filters::input($_POST['cur_email']);
 				$cPass = Filters::crypt(Filters::input($_POST['cur_pass']));
-				if($cMail != $user->data['email'])
+				if($cMail != $user::date['email'])
 				{
 					$err = 'Current e-mail not true';
 				}
-				if($cPass != $user->data['password'])
+				if($cPass != $user::date['password'])
 				{
 					$err .= 'Not true current Password';
 				}
@@ -439,7 +439,7 @@ class UserController extends Controller
 	public function actionInterface()
 	{
 		$user = new User;
-		if(!$user->loged())
+		if(!$user::loged())
 		{
 			header('location: /');
 			exit();
@@ -469,7 +469,7 @@ class UserController extends Controller
 	public function actionDialogs()
 	{	
 		$user = new User;
-		if(!$user->loged())
+		if(!$user::loged())
 		{
 			header('location: /');
 			exit();
@@ -607,7 +607,7 @@ class UserController extends Controller
 	
 	public function actionRecovery()
 	{
-		if(user::loged())
+		if(User::loged())
 		{
 			$this->redirect('/');
 		}
@@ -638,8 +638,8 @@ class UserController extends Controller
 		}
 		elseif(isset($_GET['reset']))
 		{
-			$oldPass = filters::input($_GET['tmphash']);
-			$email = filters::input($_GET['email']);
+			$oldPass = Filters::input($_GET['tmphash']);
+			$email = Filters::input($_GET['email']);
 			
 			
 			if($db->query("SELECT * FROM `users` WHERE `password` = '$oldPass' AND `email` = '$email'")->rowCount() == 1)
@@ -661,13 +661,13 @@ class UserController extends Controller
 		}
 		elseif(isset($_GET['change']))
 		{
-			$oldPass = filters::input($_GET['tmphash']);
-			$email = filters::input($_GET['email']);
-			$newPass = filters::input($_POST['new_pass']);
-			$retryPass = filters::input($_POST['retry_pass']);
+			$oldPass = Filters::input($_GET['tmphash']);
+			$email = Filters::input($_GET['email']);
+			$newPass = Filters::input($_POST['new_pass']);
+			$retryPass = Filters::input($_POST['retry_pass']);
 			if($newPass == $retryPass && mb_strlen($newPass) < 32)
 			{
-				$db->query("UPDATE `users` SET `password` = '". filters::crypt($newPass) ."' WHERE `email` = '$email'");
+				$db->query("UPDATE `users` SET `password` = '". Filters::crypt($newPass) ."' WHERE `email` = '$email'");
 				$this->redirect('/user/login');
 			}
 		}
